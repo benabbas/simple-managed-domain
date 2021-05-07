@@ -17,7 +17,7 @@ blueprint
 ```
 
 #### Interface
-![](https://i.imgur.com/cxbPNRt.png)
+
 
 #### Functions 
 **Last Update (2021/05/04)**
