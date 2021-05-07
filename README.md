@@ -16,13 +16,25 @@ pandas
 blueprint
 ```
 
+## Run the Application
+```
+#Install the Requirement
+$ pip install -r requirements.txt
+
+#Run the web-application
+$ nohup python app.py &
+
+#This is the code to update the days_left everyday
+$ nohup python expired_updator2.py &
+```
+
 #### Interface
 ![image](https://user-images.githubusercontent.com/83798223/117439265-3c1ca500-af65-11eb-9b8c-0509a3014968.png)
 
 #### Functions 
 **Last Update (2021/05/04)**
 * Reject the adding when the domain already exist
-* Give a warning when the domain 
+* Give a warning when the domain going to deleted
 
 API
 ---
