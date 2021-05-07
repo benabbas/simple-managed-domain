@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Document</title>
+   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</style>
+
+</head>
+<body>
+
+<h1>Domain Expiration Monitoring</h1>
+
+<div class="parent">
+
+  <div class="form">
+  {% with messages =  get_flashed_messages() %}
+  {% if messages %}
+  
+  {% for message in messages %}
+        <script>
+          alert("===========\nAdding Failed!\nTHE DOMAIN ALREADY EXIST\n===========");
+        </script>
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  
+     <form action="/" method="POST" class="form-table">
+        <table class="table-form" >
+           <tr class="table-form" style="border: 0" >
+              <th style="border: 0">
+                 <label for="domain">Domain</label>
+              </th>
+              <th>
+                 <label for="icp">ICP Status</label>
+              </th>
+              <th>
+                 <label for="icp">Auto Renew</label>
+              </th>
+           </tr>
+           <tr class="table-form" style="border: 0" >
+              <td>
+                 <input type="test" name="domain" required="required" id="domain" >
+              </td>
+              <td>
+                 <select type="test" name="icp" id="icp" >
+                     <option value="">None</option>
+                     <option value="Y">Yes</option>
+                           <option value="N">No</option>
+                 </select>
+              </td> 
+              <td>
+                 <select type="test" name="renew" id="renew" >
+                     <option value="">None</option>
+                     <option value="Y">Yes</option>
+                           <option value="N">No</option>
+                 </select>
+              </td> 
+           </tr>
+        </table>
+        <button type="submit" class="btn" style="border-color: white">Add Monitoring</button>
+        <button onclick="exportDomain()" type="submit" class="btn" method="GET" formaction="/export" style="border-color: white">Download CSV</button>
+     </form>
+  </div>
+  
+
+  <div class="content">   
+     <table class="table-content" >
+        <tr>
+           <th>
+              No
+           </th>
+           <th>
+              Domain
+           </th>
+           <th>
+              Updated At
+           </th>
+           <th>
+              Expired At
+           </th>
+           <th>
+              Days Left
+           </th>
+           <th>
+              ICP Status
+           </th>
+           <th>
+              Auto Renew
+           </th>
+           <th>
+              Registrar
+           </th>
+           <th>
+              Domain_Id
+           </th>
+           <th>
+              Actions
+           </th>
+           
+        </tr>
+        {% for task in tasks %}
+           <tr>
+              <td>{{ loop.index }}</td>
+              <td>{{ task.domain }}</td>
+              <td>{{ task.date_created.strftime("%Y-%m-%d %H:%M:%S") }}</td>
+              <td>{{ task.expired }}</td>
+              <td>{{ task.days_left }}</td>
+              <td>{{ task.icp }}</td>
+              <td>{{ task.renew }}</td>
+              <td>{{ task.registrar }}</td>
+              <td>{{ task.id }}</td>
+	      <td>
+		     <button onclick="deleteDomain('{{task.domain}}',{{task.id}})" class="fa-lg w3-text-green w3-padding w3-margin-center fa fa-trash" style="border-color: white"></button>
+      	     <button onclick="updateDomain({{task.id}})" class="fa-lg w3-text-green w3-padding w3-margin-center fa fa-edit" style="border-color: white"></button>
+      	     <button onclick="refreshExpired({{task.id}},'{{task.domain}}')" class="fa-lg w3-text-green w3-padding w3-margin-center fa fa-refresh" style="border-color: white"></button>
+      	     <script>
+                        function deleteDomain(domain,id) {
+                          var check = confirm("Are you sure want to delete "+domain+"?");
+                          if (check == true){ location.replace("/delete/"+id); }
+                          else { location.replace("/"); }
+                        }
+                        function updateDomain(id) {
+                            location.replace("/update/"+id)
+                        }
+                        function exportDomain() {
+                            location.replace("/export")
+                        }
+                        function refreshExpired(id,domain) {
+                            location.replace("/apitest/update?id="+id+"&domain="+domain+"&all=1")
+                        }
+            </script>
+	      </td>
+
+           </tr>
+        {% endfor %}
+     </table>
+
+     <br>
+  </div>
+</div>
+</body>
+</html> 

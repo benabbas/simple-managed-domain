@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: white;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+    text-align:center;
+}
+
+
+/* Add padding to containers */
+.container {
+  padding: 50px;
+  padding-right: 20%;
+  padding-left: 20%;
+  background-color: white;
+}
+
+/* Full-width input fields */
+input[type=text], select, input[type=datetime-local] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, select:focus, input[type=datetime-local]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Overwrite default styles of hr */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+/* Set a style for the submit button */
+.registerbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.registerbtn:hover {
+  opacity: 1;
+}
+
+/* Add a blue text color to links */
+a {
+  color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+  background-color: #f1f1f1;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+
+<form action="/update/{{task.id}}" method="POST">
+  <div class="container">
+    <h1>UPDATE RECORD OF:</h1>
+    <h1>{{task.domain}}</h1>
+    <p>Please check again before submiting the updated data</p>
+    <hr>
+
+    <label for="domain"><b>Domain Name</b></label>
+    <input type="text" placeholder="{{task.domain}}" name="domain" id="domain" value="{{task.domain}}" required>
+
+    <label for="icp"><b>ICP Status</b></label>
+    <select name="icp" id="icp" value="{{task.icp}}">
+    		 			 <option value="{{task.icp}}"></option>
+    		 			 <option value="Y">Yes</option>
+                         <option value="N">No</option>
+                         <option value="">None</option>
+	</select><br>
+        
+    <label for="revew"><b>Auto Renew?</b></label>
+	<select name="renew" id="renew" value="{{task.renew}}">
+    		 			 <option value="{{task.renew}}"></option>
+    		 			 <option value="Y">Yes</option>
+                         <option value="N">No</option>
+                         <option value="">None</option>
+	</select><br>
+	
+	<label for="registrar"><b>Registrar</b></label>
+	<input type="text" name="registrar" id="registrar" value="{{task.registrar}}"><br>
+	
+	<label for="expired"><b>Expired: {{task.expired}}</b></label>
+	<input type="datetime-local" name="expired" id="expired"><br>
+	<script>
+    	var elem = document.getElementById("expired");
+    	var date = "{{task.expired}}".replace(/ /g,"T").slice(0, -3);
+    	elem.value = date;
+	</script>
+    
+    <button type="submit" class="registerbtn">Submit</button>
+    <button type="submit" class="registerbtn" formmethod="get" formaction="/">Cancel</button>
+  </div>
+  
+  <div class="container signin">
+  </div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+body {
+	margin: 0;
+	font-family: verdana;
+	background-color: #F0FFFF;
+	text-align:center;
+}
+
+.parent{
+    display: block;
+    width: 100%;
+}
+.form{
+	top: 30px;
+	width:auto;
+	background-color: #F0F8FF;
+}
+
+.table-content {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-left: auto;
+    margin-right: auto;
+ }
+.table-content thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+}
+.table-content th,
+.table-content td {
+    padding: 12px 15px;
+}
+.table-content th {
+	background-color: white;
+	position: sticky;
+	top: 0;
+}
+.table-content tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.table-content tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.table-content tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+.table-content tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.table-form {
+  padding: 5px;
+  top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  font-size: 0.9em;
+  font-family: sans-serif;
+}
+input[type=test], select[type=test] {
+  width: auto;
+  padding: 15px;
+  margin: 5px 0 5px 0;
+  border: none;
+  background: #f1f1f1;
+}
+.btn {
+  background-color: green;
+  color: white;
+  padding: 5px 5px;
+  border: 2px;
+  cursor: pointer;
+  width: 160px;
+  opacity: 0.9;
+  margin-left: auto;
+  margin-right: auto;
+}
+.btn:hover {
+  opacity: 1;
+}
