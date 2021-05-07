@@ -153,6 +153,7 @@ done
 
 
 **Acknowledge and close the alert information:**
+
 ![image](https://user-images.githubusercontent.com/83798223/117440543-c6193d80-af66-11eb-8f9a-0102ff07f451.png)
 
 ![image](https://user-images.githubusercontent.com/83798223/117440483-ada92300-af66-11eb-98e4-c0e245161d6f.png)
