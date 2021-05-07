@@ -147,6 +147,9 @@ done
 **Triggered:** 
 * If the List of Managed Domain-Expired is not empty then the alert will appear
 
+![image](https://user-images.githubusercontent.com/83798223/117440681-f2cd5500-af66-11eb-8470-39b757be42cd.png)
+
+
 **Update Interval:** Only updated on Monday at 17.00 GMT+8
 
 
