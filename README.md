@@ -28,29 +28,29 @@ API
 ---
 
 * Get all domain list: 
-`curl -s https://www.bentech.site/apitest/all | jq -r` 
+`curl -s http://127.0.0.1/apitest/all | jq -r` 
 
 * Get all domain that will be expired in 60 days: 
-`curl -s https://www.bentech.site/apitest/expired | jq -r` 
+`curl -s http://127.0.0.1/apitest/expired | jq -r` 
 
 * Add new domain:
-`curl -s https://www.bentech.site/apitest/update?domain=test.com`
+`curl -s http://127.0.0.1/apitest/update?domain=test.com`
 
 * Force Update:
     * Force add domain 
-`curl -s https://www.bentech.site/apitest/update/force?domain={value}`
+`curl -s http://127.0.0.1/apitest/update/force?domain={value}`
 
     * days_left 
-`curl -s https://www.bentech.site/apitest/update/force?id={value}&days_left={value}`
+`curl -s http://127.0.0.1/apitest/update/force?id={value}&days_left={value}`
 
     * icp 
-`curl -s https://www.bentech.site/apitest/update/force?id={}&icp={value}`
+`curl -s http://127.0.0.1/apitest/update/force?id={}&icp={value}`
 
     * registrar 
-`curl -s https://www.bentech.site/apitest/update/force?id={}&registrar={value}`
+`curl -s http://127.0.0.1/apitest/update/force?id={}&registrar={value}`
 
     * expired 
-`curl -s https://www.bentech.site/apitest/update/force?id={}&expired={value}`
+`curl -s http://127.0.0.1/apitest/update/force?id={}&expired={value}`
 
 Manual Update
 ---
@@ -70,7 +70,7 @@ import requests
 import json
 import pandas as pd
 
-url = 'http://www.bentech.site/apitest/all'
+url = 'http://127.0.0.1/apitest/all'
 
 resp=requests.get(url)
     # read the text object string
@@ -82,7 +82,7 @@ except:
 data = pd.DataFrame.from_dict(resp_text)
 
 def update(data_id, data_domain):
-    update_url="http://www.bentech.site/apitest/update?id="+data_id+"&domain="+data_domain+"&all=0"
+    update_url="http://127.0.0.1/apitest/update?id="+data_id+"&domain="+data_domain+"&all=0"
     resp_update=requests.get(update_url)
     print(resp_update.text)
 
@@ -105,7 +105,7 @@ import requests
 import json
 import pandas as pd
 
-url = 'http://www.bentech.site/apitest/all'
+url = 'http://127.0.0.1/apitest/all'
 
 resp=requests.get(url)
     # read the text object string
@@ -118,7 +118,7 @@ data = pd.DataFrame.from_dict(resp_text)
 
 def update(data_id, registrar):
     data_id = str(data_id)
-    update_url="https://www.bentech.site/apitest/update/force?id="+data_id+"&registrar="+registrar
+    update_url="http://127.0.0.1/apitest/update/force?id="+data_id+"&registrar="+registrar
     resp_update=requests.get(update_url)
     return resp_update.text
 
@@ -135,13 +135,13 @@ Script to get the domain names that is going to expired within 60 days
 ```gherkin=bash
 #!/bin/bash
 
-for i in $(curl "https://www.bentech.site/apitest/expired" -s | jq -r '.[]| {domain: .domain, days_left: .days_left}' | tr -d '{' | xargs | sed 's/}/\n/g' | sed '/^$/d'| sed 's/ //g')
+for i in $(curl "http://127.0.0.1/apitest/expired" -s | jq -r '.[]| {domain: .domain, days_left: .days_left}' | tr -d '{' | xargs | sed 's/}/\n/g' | sed '/^$/d'| sed 's/ //g')
 do
         echo $i | sed 's/domain://g' | sed 's/days_left://g' | awk -F ',' '{print $1" ("$2" days),"}'
 done
 ```
 
-![](https://i.imgur.com/cMzHRQt.png)
+
 
 
 **Triggered:** 
@@ -149,10 +149,9 @@ done
 
 **Update Interval:** Only updated on Monday at 17.00 GMT+8
 
-![](https://i.imgur.com/FPid6ER.png)
-![](https://i.imgur.com/ts6qdJD.png)
+
 
 **Acknowledge and close the alert information:**
-![](https://i.imgur.com/uK8wKey.png)
+
 
 ###### tags: `mlytics` `managed_domain`
