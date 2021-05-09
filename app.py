@@ -122,8 +122,7 @@ def get_apitest():
 
     # Convert the response to a plain list of dicts
     else:
-        response = [dict(row.items()) for row in result]
-
+        response = json.loads(str(result.mappings().all()).replace("\'", "\""))
     # Output the query result as JSON
     return(json.dumps(response))
 
@@ -136,7 +135,7 @@ def get_expired():
 
     # Convert the response to a plain list of dicts
     else:
-        response = [dict(row.items()) for row in result]
+        response = json.loads(str(result.mappings().all()).replace("\'", "\""))
 
     # Output the query result as JSON
     return(json.dumps(response))
@@ -198,11 +197,11 @@ def get_branch_data_file():
         response = []
     # Convert the response to a plain list of dicts
     else:
-        response = [dict(row.items()) for row in result]
+        response = json.loads(str(result.mappings().all()).replace("\'", "\""))
         
     df = pd.read_json(json.dumps(response))
-    df.to_csv(r'/home/domain_monitoring/File/output.csv', index = False)
-    return_file = '/home/domain_monitoring/File/output.csv'
+    df.to_csv(r'./File/output.csv', index = False)
+    return_file = './File/output.csv'
     return send_file(return_file, as_attachment=True)
         
 #FORCE UPDATE

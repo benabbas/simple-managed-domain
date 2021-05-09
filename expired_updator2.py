@@ -12,7 +12,7 @@ import pandas as pd
 import logging
 import time
 
-url = 'http://127.0.0.1/apitest/all'
+url = 'http://127.0.0.1:80/apitest/all'
 
 resp=requests.get(url)
     # read the text object string
@@ -24,7 +24,7 @@ except:
 data = pd.DataFrame.from_dict(resp_text)
 
 def update(data_id, data_domain, result):
-    update_url="http://127.0.0.1/apitest/update?id="+data_id+"&domain="+data_domain+"&all=0"
+    update_url="http://127.0.0.1:80/apitest/update?id="+data_id+"&domain="+data_domain+"&all=0"
     resp_update=requests.get(update_url)
     result = result.append(resp_update.text)
     return resp_update.text, result
