@@ -20,6 +20,7 @@ blueprint
 ```
 #Install the Requirement
 $ pip install -r requirements.txt
+$ mkdir File
 
 #Run the web-application
 $ nohup python app.py &
